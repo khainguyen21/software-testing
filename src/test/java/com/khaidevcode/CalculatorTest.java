@@ -1,16 +1,36 @@
 package com.khaidevcode;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+class CalculatorTest {
+
+    Calculator underTest;
+
+    @BeforeEach
+    void setUp() {
+        underTest = new Calculator();
+    }
+
+    @AfterEach
+    void tearDown() {
+
+    }
 
 
-public class CalculatorTest {
-    private final Calculator underTest = new Calculator();
+    @BeforeAll
+    static void beforeAll() {
+
+    }
+
+    @AfterAll
+    static void afterAll() {
+
+    }
 
     @Test
-    void canAddNumbers() {
+    void canAdd2Numbers() {
+        System.out.println("canAdd2Numbers");
         // 1 - given
         var number1 = 3;
         var number2 = 3;
@@ -25,9 +45,9 @@ public class CalculatorTest {
 
     }
 
-
     @Test
-    void name() {
+    void can() {
+        System.out.println("can");
         //given
         //when
         //then
