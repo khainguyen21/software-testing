@@ -1,7 +1,6 @@
 package com.khaidevcode;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.condition.EnabledOnJre;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 
@@ -22,7 +21,6 @@ public class AppTest {
 
     // Only run if the Operating System is Mac
     @EnabledOnOs(OS.MAC)
-
     // Repeat how many times would you like to run this test
     @RepeatedTest(10)
     @Tag("slow")
