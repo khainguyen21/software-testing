@@ -1,5 +1,7 @@
 package com.khaidevcode;
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -9,13 +11,14 @@ class EmailValidatorTest {
 
     EmailValidator underTest = new EmailValidator();
 
+    // Create many test cases to for the canValidateEmail method
     @ParameterizedTest
     @CsvSource({
             "hello@amigoscode.com, true",
             "nelson+foo@amigoscode.com, true",
             "nelson, false",
             "helloamigoscode@com, false",
-            "belleamigascade.com, false",
+            "belletristic.com, false",
             "'', false",
 
     })
