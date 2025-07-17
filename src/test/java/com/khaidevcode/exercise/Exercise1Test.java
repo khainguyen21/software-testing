@@ -7,8 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import javax.swing.*;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class Exercise1Test {
 
@@ -105,7 +104,7 @@ class Exercise1Test {
 
 
     @Test
-    void canCheckIfStudentIdNull() {
+    void shouldReturnFalseForNullId() {
         String studentId = null;
 
         var actual = underTest.isValidStudentId(studentId);
@@ -153,11 +152,44 @@ class Exercise1Test {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Test
-    void generateUsername() {
+    @ParameterizedTest
+    @CsvSource({
+            "'Jane Doe',           'jdoe'",
+            "'jane doe',           'jdoe'",          // Test all lowercase
+            "'PETER JONES',        'pjones'",        // Test all uppercase
+            "'  Mary Poppins  ',   'mpoppins'",      // Test with leading/trailing spaces
+            "'David   Copperfield','dcopperfield'",  // Test with multiple spaces between names
+            "'First Middle Last',  'fmiddle'"        // Test with a three-part name
+    })
+    void canGenerateUsername(String fullName, String username) {
         //given
-        //when
+        var actual = underTest.generateUsername(fullName);
+
         //then
+        assertThat(actual).isEqualTo(username);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "''",                // Empty string
+            "'    '",            // String with only spaces
+            "'Cher'",            // Single name (no space)
+            "'  SingleName  '"   // Single name after trimming
+    })
+    void shouldReturnEmptyStringForInvalidNames(String invalidName) {
+        String actual = underTest.generateUsername(invalidName);
+
+        String expected = "";
+        assertThat(actual).isEqualTo(expected);
+    }
+
+        @Test
+    void shouldReturnEmptyStringForNullName() {
+        String fullName = null;
+        var actual = underTest.generateUsername(fullName);
+
+        String expected = "";
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test

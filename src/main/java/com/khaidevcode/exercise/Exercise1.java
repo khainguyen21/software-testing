@@ -42,6 +42,9 @@ public class Exercise1 {
     public String generateUsername(String fullName) {
         if (fullName == null || !fullName.contains(" ")) return "";
         String[] parts = fullName.trim().split("\\s+");
+        if (parts.length < 2) {
+            return "";
+        }
         return (parts[0].charAt(0) + parts[1]).toLowerCase();
     }
 
