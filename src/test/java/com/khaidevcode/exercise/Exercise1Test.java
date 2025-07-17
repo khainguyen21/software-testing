@@ -84,11 +84,35 @@ class Exercise1Test {
         assertThat(actual).isEqualTo(expectedVowels);
     }
 
-        @Test
-    void isValidStudentId() {
+    @ParameterizedTest
+    @CsvSource({
+            "S123, false",      // Too few digits
+            "S12345, false",    // Too many digits
+            "A1234, false",     // Incorrect prefix
+            "S123A, false",     // Contains a letter instead of a digit
+            "S 1234, false",    // Contains a space
+            "s1234, false",     // Lowercase 's'
+            "'', false",           // Empty string
+            "S1234, true"
+    })
+    void canCheckValidStudentId(String studentID, boolean expected) {
         //given
+        var actual = underTest.isValidStudentId(studentID);
         //when
+        assertThat(actual).isEqualTo(expected);
         //then
+    }
+
+
+    @Test
+    void canCheckIfStudentIdNull() {
+        String studentId = null;
+
+        var actual = underTest.isValidStudentId(studentId);
+
+        boolean expected = false;
+
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
