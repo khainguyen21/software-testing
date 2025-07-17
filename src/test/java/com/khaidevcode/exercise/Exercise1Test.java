@@ -56,14 +56,35 @@ class Exercise1Test {
 
     }
 
-    @Test
-    void countVowels() {
+    @ParameterizedTest
+    @CsvSource({
+            "Aurelio, 5",
+            "Isabella, 4",
+            "Ng, 0",
+            "Mary-Anne, 3",
+            "Élodie, 3"
+
+    })
+    void canCountVowels(String name, int expectedVowels) {
         //given
-        //when
+        var actual = underTest.countVowels(name);
+
         //then
+        assertThat(actual).isEqualTo(expectedVowels);
     }
 
     @Test
+    void canCountVowelsIfNameIsNull() {
+        String name = null;
+        //given
+        var actual = underTest.countVowels(name);
+
+        var expectedVowels = 0;
+        //then
+        assertThat(actual).isEqualTo(expectedVowels);
+    }
+
+        @Test
     void isValidStudentId() {
         //given
         //when
