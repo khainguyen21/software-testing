@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -232,12 +233,67 @@ class Exercise1Test {
     }
 
     @Test
-    void hasDuplicateNames() {
+    void shouldReturnTrueWhenListHasDuplicateNames() {
         //given
-        //when
+        var students = List.of(
+                new Student("Alex", 10),
+                new Student("Sally", 54),
+                new Student("Sally", 54)
+        );
+
+        var actual = underTest.hasDuplicateNames(students);
         //then
+        assertThat(actual).isTrue();
     }
 
+    @Test
+    void shouldReturnTrueWhenDuplicatesHaveDifferentCases() {
+        //given
+        var students = List.of(
+                new Student("Alex", 10),
+                new Student("Sally", 54),
+                new Student("sAlLY", 54)
+        );
+
+        var actual = underTest.hasDuplicateNames(students);
+        //then
+        assertThat(actual).isTrue();
+    }
+
+    @Test
+    void shouldReturnFalseWhenHaveNoDuplicates() {
+        //given
+        var students = List.of(
+                new Student("Alex", 10),
+                new Student("Jamila", 80),
+                new Student("Anna", 7),
+                new Student("George", 18),
+                new Student("Sally", 54)
+        );
+
+        var actual = underTest.hasDuplicateNames(students);
+        //then
+        assertThat(actual).isFalse();
+    }
+
+    @Test
+    void shouldReturnFalseWhenHaveEmptyList() {
+        //given
+        var students = new ArrayList<Student>();
+
+        var actual = underTest.hasDuplicateNames(students);
+        //then
+        assertThat(actual).isFalse();
+    }
+
+    @Test
+    void shouldReturnFalseWhenHaveNull() {
+        //given
+
+        var actual = underTest.hasDuplicateNames(null);
+        //then
+        assertThat(actual).isFalse();
+    }
     @Test
     void reverseCourses() {
         //given
