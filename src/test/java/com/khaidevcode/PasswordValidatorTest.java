@@ -56,11 +56,19 @@ public class PasswordValidatorTest {
     void willFailIfPasswordDoesNotContainsAtLeastOneDigit() {
         //given
         String password = "password";
-
         //when
         var actual = underTest.test(password);
         //then
+        assertThat(actual).isFalse();
+    }
 
+    @Test
+    void willFailIfPasswordDoesNotContainsAtLeastOneSpecialChar() {
+        //given
+        String password = "password1";
+        //when
+        var actual = underTest.test(password);
+        //then
         assertThat(actual).isFalse();
     }
 }
