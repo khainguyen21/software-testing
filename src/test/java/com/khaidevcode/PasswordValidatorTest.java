@@ -39,4 +39,28 @@ public class PasswordValidatorTest {
 
         assertThat(actual).isFalse();
     }
+
+    @Test
+    void willFailIfPasswordDoesNotMeetMinimumLengthRequiredAfterTrimming() {
+        //given
+        String password = "  pass";
+
+        //when
+        var actual = underTest.test(password);
+        //then
+
+        assertThat(actual).isFalse();
+    }
+
+    @Test
+    void willFailIfPasswordDoesNotContainsAtLeastOneDigit() {
+        //given
+        String password = "password";
+
+        //when
+        var actual = underTest.test(password);
+        //then
+
+        assertThat(actual).isFalse();
+    }
 }
