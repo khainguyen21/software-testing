@@ -1,6 +1,10 @@
 package com.khaidevcode;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import javax.swing.text.html.CSS;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -70,5 +74,39 @@ public class PasswordValidatorTest {
         var actual = underTest.test(password);
         //then
         assertThat(actual).isFalse();
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "password1!, true",
+            "password1@, true",
+            "Password1#, true",
+            "Password1$, true",
+            "Password1%, true",
+            "Password1^, true",
+            "Password1&, true",
+            "Password1*, true",
+            "Password1(, true",
+            "Password1), true",
+            "Password1_, true",
+            "Password1+, true",
+            "Password1=, true",
+            "Password1<, true",
+            "Password1>, true",
+            "Password1?, true",
+            "Password1/, true",
+            "Password1[, true",
+            "Password1], true",
+            "Password1{, true",
+            "Password1}, true",
+            "Password1|, true",
+            "Password1:, false",
+    })
+    void canValidateSpecialCharacters(String password, boolean expected) {
+
+        //given
+        var actual = underTest.test(password);
+        //then
+        assertThat(actual).isEqualTo(expected);
     }
 }
