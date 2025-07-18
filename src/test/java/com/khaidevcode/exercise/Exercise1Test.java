@@ -294,24 +294,84 @@ class Exercise1Test {
         //then
         assertThat(actual).isFalse();
     }
+
+
     @Test
-    void reverseCourses() {
+    void shouldReverseListOfCourses() {
         //given
+        List<String> originalCourses = List.of("Java", "Python", "SQL");
+        List<String> expectedReversed = List.of("SQL", "Python", "Java");
         //when
+        var actual = underTest.reverseCourses(originalCourses);
         //then
+        assertThat(actual).isEqualTo(expectedReversed);
     }
 
     @Test
-    void hasPassed() {
+    void shouldReturnSameListForSingleCourse() {
         //given
+        List<String> originalCourses = List.of("Java");
         //when
+        var actual = underTest.reverseCourses(originalCourses);
         //then
+        assertThat(actual).isEqualTo(originalCourses);
     }
 
     @Test
-    void assignBadge() {
+    void shouldReturnEmptyListForEmptyListInput() {
+        //given
+        List<String> emptyList =new ArrayList<>();
+        //when
+        var actual = underTest.reverseCourses(emptyList);
+        //then
+        assertThat(actual).isEqualTo(emptyList);
+    }
+    @Test
+    void shouldReturnEmptyListForNullInput() {
         //given
         //when
+        var actual = underTest.reverseCourses(null);
         //then
+        assertThat(actual).isEqualTo(new ArrayList<>());
+    }
+
+
+    @ParameterizedTest
+    @CsvSource({
+            "67, true",
+            "50, true",
+            "51, true",
+            "49, false",
+            "40, false",
+    })
+    void hasPassed(int score, boolean expected) {
+        //given
+        var actual = underTest.hasPassed(score);
+
+        //then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void shouldReturnStarStudentBadgeWhenHelpful() {
+        //given
+        boolean isHelpFul = true;
+        String expectedBadge = "Star Student";
+        //when
+        var actual = underTest.assignBadge(isHelpFul);
+        //then
+        assertThat(actual).isEqualTo(expectedBadge);
+    }
+
+
+    @Test
+    void shouldReturnNeedImprovementBadgeWhenNotHelpful() {
+        //given
+        boolean isHelpFul = false;
+        String expectedBadge = "Needs Improvement";
+        //when
+        var actual = underTest.assignBadge(isHelpFul);
+        //then
+        assertThat(actual).isEqualTo(expectedBadge);
     }
 }
