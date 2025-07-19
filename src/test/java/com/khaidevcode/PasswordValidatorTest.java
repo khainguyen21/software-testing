@@ -109,4 +109,6 @@ public class PasswordValidatorTest {
         //then
         assertThat(actual).isEqualTo(expected);
     }
+
+
 }
